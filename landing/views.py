@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .forms import SubsctiberForm
+from products.models import *
 
 
 def landing(request):
@@ -13,3 +14,8 @@ def landing(request):
 
         new_form = form.save()
     return render(request, 'landing/landing.html', locals())
+
+
+def home(request):
+    product_images = ProductImage.objects.filter(is_active=True, is_main=True)
+    return render(request, 'landing/home.html', locals())
