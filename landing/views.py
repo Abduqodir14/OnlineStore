@@ -17,5 +17,7 @@ def landing(request):
 
 
 def home(request):
-    product_images = ProductImage.objects.filter(is_active=True, is_main=True)
+    product_images = ProductImage.objects.filter(is_active=True, is_main=True, product__is_active=True)
+    product_images_phones = product_images.filter(product__type__id=1)
+    product_images_backpacks = product_images.filter(product__type__id=2)
     return render(request, 'landing/home.html', locals())
